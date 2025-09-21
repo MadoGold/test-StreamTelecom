@@ -1,0 +1,11 @@
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.item {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 8px;
+}

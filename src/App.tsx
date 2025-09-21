@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
 
-function App() {
+import users from './data/users.json';
+
+import { UsersListView } from './components/UsersListView';
+import { UsersTilesView } from './components/UsersTilesView';
+import { Button } from './components/Button';
+
+import styles from './App.module.css';
+
+export const App = () => {
+  const [view, setView] = useState<'list' | 'tiles'>('list');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.app}>
+      <div className="container">
+        <h1 className={styles.title}>Users</h1>
+        <div className={styles.controls}>
+          <Button onClick={() => setView('list')}>List View</Button>
+          <Button className={styles.redButton} onClick={() => setView('tiles')}>
+            Tiles View
+          </Button>
+        </div>
+        {view === 'list' ? (
+          <UsersListView users={users} />
+        ) : (
+          <UsersTilesView users={users} />
+        )}
+      </div>
     </div>
   );
-}
-
-export default App;
+};
